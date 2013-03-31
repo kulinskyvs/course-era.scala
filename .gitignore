@@ -4,10 +4,10 @@ classes/
 docs/
 deploy/
 bin/
-.settings/
 .worksheet/
 .cache
-.classpath
-.project
+target/
+project/target/
+
 
 
