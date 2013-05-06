@@ -32,7 +32,20 @@ object listfun {
   def lengthFun[T](xs: List[T]): Int =
     (xs foldRight 0)( (x:T, ac:Int) => ac + 1)    //> lengthFun: [T](xs: List[T])Int
 
-  mapFun(List(1,2,3,4,5), (x:Int) => x/x)         //> res8: List[Int] = List(1, 1, 1, 1, 1)
-  lengthFun(List(1,2,3,4,5))                      //> res9: Int = 5
+  def flatMapFun[T, U] (xs : List[T], f: T => Iterable[U]) : List[U] =
+    for {
+      x <- xs
+      y <- f(x)
+    } yield y                                     //> flatMapFun: [T, U](xs: List[T], f: T => Iterable[U])List[U]
+
+
+  List(1,2,3) flatMap (x => x :: List(1))         //> res8: List[Int] = List(1, 1, 2, 1, 3, 1)
+  flatMapFun[Int, Int](List(1,2,3), _ :: List(1)) //> res9: List[Int] = List(1, 1, 2, 1, 3, 1)
+
+  mapFun(List(1,2,3,4,5), (x:Int) => x/x)         //> res10: List[Int] = List(1, 1, 1, 1, 1)
+  lengthFun(List(1,2,3,4,5))                      //> res11: Int = 5
+
+  def reverse[T](xs:List[T]):List[T]=
+    (xs foldLeft List[T]()) ( (xs,x) => x :: xs ) //> reverse: [T](xs: List[T])List[T]
 
 }

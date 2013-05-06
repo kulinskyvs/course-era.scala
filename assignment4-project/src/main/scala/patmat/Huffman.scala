@@ -33,7 +33,7 @@ object Huffman {
 
   def chars(tree: CodeTree): List[Char] = tree match {
     case Leaf(c, _) => List(c)
-    case Fork(l, r, _, _) => chars(l) ::: chars(r)
+    case Fork(_, _, chars, _) => chars
   }
 
   def makeCodeTree(left: CodeTree, right: CodeTree) =
